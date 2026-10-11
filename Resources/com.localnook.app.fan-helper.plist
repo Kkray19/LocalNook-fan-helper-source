@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.localnook.app.fan-helper</string>
+	<key>Program</key>
+	<string>/Library/PrivilegedHelperTools/com.localnook.app.fan-helper</string>
+	<key>MachServices</key>
+	<dict>
+		<key>com.localnook.app.fan-helper</key>
+		<true/>
+	</dict>
+	<key>AssociatedBundleIdentifiers</key>
+	<array>
+		<string>com.localnook.app</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<dict>
+		<key>SuccessfulExit</key>
+		<false/>
+		<key>PathState</key>
+		<dict>
+			<key>/var/run/localnook-fan-control.active</key>
+			<true/>
+			<key>/Library/PrivilegedHelperTools/com.localnook.app.fan-helper.sleep-hold</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>ThrottleInterval</key>
+	<integer>5</integer>
+	<key>ExitTimeOut</key>
+	<integer>30</integer>
+</dict>
+</plist>

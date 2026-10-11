@@ -1,0 +1,63 @@
+LocalNook fan helper: notices
+
+Copyright (C) 2026 Krish Kowli
+
+This tree is the corresponding source of the program
+com.localnook.app.fan-helper, the root fan helper that ships inside
+LocalNook.app (Contents/Library/LaunchServices/), together with the one file of
+the LocalNook app that a licence requires to be published. PROVENANCE says which
+commit of LocalNook's repository it was made from. MANIFEST.sha256 has the
+SHA-256 of every file.
+
+Who owns what, and under which licence
+--------------------------------------
+
+Sources/LocalNookFanHelper/  and  Sources/LocalNookSMC/
+    GNU General Public License, version 3 or (at your option) any later
+    version. Text: LICENSE and LICENSES/GPL-3.0-or-later.txt.
+    Copyright (C) 2026 Krish Kowli. Portions adapted from Vorssaint
+    (https://github.com/vorssaint/vorssaint-utils, commit e4f9432), Copyright
+    (C) 2026 Vorssaint, GPL-3.0-or-later; modified for LocalNook by Krish
+    Kowli, 2026. Each file that carries those portions says so in its header.
+
+Sources/LocalNookShared/
+    MIT licence. Text: LICENSES/MIT-LocalNookShared.txt.
+    Copyright (c) 2026 Krish Kowli. This is the owner's own code, which the
+    helper and the LocalNook app both link; it is MIT so that it can sit in
+    this GPL program and in the app alike. The file
+    Sources/LocalNookShared/HelperWireContract.swift is the written-down wire
+    between the two programs and is published exactly as the app has it.
+
+mpl/ElevatedWindowSpace.swift
+    Mozilla Public License, version 2.0. Text: mpl/MPL-2.0.txt. Copyright (c)
+    2018, Aditya Vaidyam and Contributors, from the CGSSpace wrapper in Parrot
+    (https://github.com/avaidyam/Parrot) by way of boring.notch
+    (https://github.com/TheBoredTeam/boring.notch), modified for LocalNook. It
+    is not part of the helper and is not built here: the LocalNook app compiles
+    it, and the MPL asks that its source stay available. mpl/README.md.
+
+Third-party material inside the helper's files
+----------------------------------------------
+
+SMCKit (https://github.com/beltex/SMCKit), by beltex, MIT licence, Copyright
+(c) 2014-2017 beltex: the layout of the AppleSMC 80-byte parameter block and
+the selector and command numbers, in Sources/LocalNookSMC/SMCReader.swift and
+Sources/LocalNookFanHelper/SMCFanWriter.swift. Text: LICENSES/MIT-SMCKit.txt.
+
+Stats (https://github.com/exelban/stats), by Serhiy Mytrovtsiy, MIT licence,
+Copyright (c) 2019 Serhiy Mytrovtsiy: the per-chip lists of processor-core
+sensor keys, in Sources/LocalNookSMC/ThermalCatalog.swift, and the 32-bit data
+size layout in Sources/LocalNookSMC/SMCReader.swift. Text: LICENSES/MIT-Stats.txt.
+
+Both reached LocalNook through Vorssaint's code. Their notices are kept with
+this source because MIT asks that they travel with copies or substantial
+portions of the software.
+
+No warranty
+-----------
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for details. The root
+helper writes to the Mac's fan controller and changes its sleep setting; read
+README.md before installing a build of your own.

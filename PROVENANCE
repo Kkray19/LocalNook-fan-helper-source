@@ -1,0 +1,27 @@
+LocalNook fan helper: where this source tree came from
+
+Repository commit:   63126754297fb3f60d0af4197804a575772b71a0
+Commit date:         2026-10-10T21:30:16-07:00
+Commit subject:      Merge integrate/v0.5.0: LocalNook 0.5.0, the paid v1 candidate
+Tagged:              (no tag)
+LocalNook version:   0.5.0 (the VERSION file at that commit)
+Helper wire revision: 3 (Sources/LocalNookShared/HelperWire.swift)
+
+Every file in this tree is a tracked file of that commit, byte for byte, except
+the ones the tool wrote: Package.swift, PROVENANCE, LICENSE (a copy of
+LICENSES/GPL-3.0-or-later.txt), .gitignore and MANIFEST.sha256.
+
+Where each part comes from (repository path -> path in this tree):
+  Sources/LocalNookFanHelper/                       -> Sources/LocalNookFanHelper/
+  Sources/LocalNookSMC/                             -> Sources/LocalNookSMC/
+  Sources/LocalNookShared/                          -> Sources/LocalNookShared/
+  Resources/com.localnook.app.fan-helper.plist      -> Resources/com.localnook.app.fan-helper.plist
+  Sources/LocalNook/Vendor/ElevatedWindowSpace.swift -> mpl/ElevatedWindowSpace.swift
+  MPL-2.0.txt                                       -> mpl/MPL-2.0.txt
+  Package.swift (the three targets' declarations)   -> Package.swift (generated)
+  LICENSES/                                         -> LICENSES/ (and LICENSE, a copy of the GPL text)
+  scripts/helper-source/{README.md,NOTICE,build-helper.sh,mpl-README.md}
+                                                    -> README.md, NOTICE, build-helper.sh, mpl/README.md
+
+Made by: scripts/make-helper-source.sh --commit 63126754297fb3f60d0af4197804a575772b71a0
+A tree made from the same commit has the same MANIFEST.sha256.

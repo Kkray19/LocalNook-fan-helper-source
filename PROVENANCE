@@ -1,10 +1,10 @@
 LocalNook fan helper: where this source tree came from
 
-Repository commit:   63126754297fb3f60d0af4197804a575772b71a0
-Commit date:         2026-10-10T21:30:16-07:00
-Commit subject:      Merge integrate/v0.5.0: LocalNook 0.5.0, the paid v1 candidate
+Repository commit:   4b4d591502456603daa1def96dc3216f99fbca97
+Commit date:         2026-10-11T21:36:44-07:00
+Commit subject:      Version 0.5.1
 Tagged:              (no tag)
-LocalNook version:   0.5.0 (the VERSION file at that commit)
+LocalNook version:   0.5.1 (the VERSION file at that commit)
 Helper wire revision: 3 (Sources/LocalNookShared/HelperWire.swift)
 
 Every file in this tree is a tracked file of that commit, byte for byte, except
@@ -23,5 +23,5 @@ Where each part comes from (repository path -> path in this tree):
   scripts/helper-source/{README.md,NOTICE,build-helper.sh,mpl-README.md}
                                                     -> README.md, NOTICE, build-helper.sh, mpl/README.md
 
-Made by: scripts/make-helper-source.sh --commit 63126754297fb3f60d0af4197804a575772b71a0
+Made by: scripts/make-helper-source.sh --commit 4b4d591502456603daa1def96dc3216f99fbca97
 A tree made from the same commit has the same MANIFEST.sha256.

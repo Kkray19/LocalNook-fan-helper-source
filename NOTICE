@@ -1,12 +1,12 @@
-LocalNook fan helper: notices
+Oriel fan helper (formerly LocalNook): notices
 
 Copyright (C) 2026 Krish Kowli
 
 This tree is the corresponding source of the program
 com.localnook.app.fan-helper, the root fan helper that ships inside
-LocalNook.app (Contents/Library/LaunchServices/), together with the one file of
-the LocalNook app that a licence requires to be published. PROVENANCE says which
-commit of LocalNook's repository it was made from. MANIFEST.sha256 has the
+Oriel.app (Contents/Library/LaunchServices/), together with the one file of
+the Oriel app that a licence requires to be published. PROVENANCE says which
+commit of Oriel's repository it was made from. MANIFEST.sha256 has the
 SHA-256 of every file.
 
 Who owns what, and under which licence
@@ -23,7 +23,7 @@ Sources/LocalNookFanHelper/  and  Sources/LocalNookSMC/
 Sources/LocalNookShared/
     MIT licence. Text: LICENSES/MIT-LocalNookShared.txt.
     Copyright (c) 2026 Krish Kowli. This is the owner's own code, which the
-    helper and the LocalNook app both link; it is MIT so that it can sit in
+    helper and the Oriel app both link; it is MIT so that it can sit in
     this GPL program and in the app alike. The file
     Sources/LocalNookShared/HelperWireContract.swift is the written-down wire
     between the two programs and is published exactly as the app has it.
@@ -33,7 +33,7 @@ mpl/ElevatedWindowSpace.swift
     2018, Aditya Vaidyam and Contributors, from the CGSSpace wrapper in Parrot
     (https://github.com/avaidyam/Parrot) by way of boring.notch
     (https://github.com/TheBoredTeam/boring.notch), modified for LocalNook. It
-    is not part of the helper and is not built here: the LocalNook app compiles
+    is not part of the helper and is not built here: the Oriel app compiles
     it, and the MPL asks that its source stay available. mpl/README.md.
 
 Third-party material inside the helper's files

@@ -1,20 +1,25 @@
-# LocalNook fan helper: corresponding source
+# Oriel fan helper (formerly LocalNook): corresponding source
 
 This is the source code of `com.localnook.app.fan-helper`, the small root
-program that ships inside LocalNook.app (in
+program that ships inside Oriel.app (in
 `Contents/Library/LaunchServices/`). It is a program of its own, separate from
-the LocalNook app, and it is free software under the GNU General Public
+the Oriel app, and it is free software under the GNU General Public
 License, version 3 or (at your option) any later version. This tree is its
 complete corresponding source, with the scripts that build it, so that you can
 read it, build it, check it against the copy you were given, change it and pass
 it on under the same licence.
 
-`PROVENANCE` says exactly which commit of LocalNook's repository this tree was made
+Oriel is the Mac app that was called LocalNook until it was renamed, and its version numbers started
+again at 0.1.0 with LocalNook 0.5.1: an Oriel 0.4.0 is not a LocalNook 0.4.0. The helper, its library and
+many of the files and folders named below still use the old name, and so does the helper's identifier,
+`com.localnook.app.fan-helper`.
+
+`PROVENANCE` says exactly which commit of Oriel's repository this tree was made
 from, and `MANIFEST.sha256` has the SHA-256 of every file in it.
 
 ## What the helper is, and what it does
 
-LocalNook is a macOS notch utility. Everything it does runs as you, except two
+Oriel is a macOS notch utility. Everything it does runs as you, except two
 things that need root, which the helper does and nothing else does:
 
 - **Fan control.** It reads the Mac's fan speeds and chip temperatures from the
@@ -45,13 +50,13 @@ themselves against. That file is published here exactly as the app has it.
 | `Sources/LocalNookSMC/` | The library only the helper links: the SMC reader, the thermal catalog, the helper's calls |
 | `Sources/LocalNookShared/` | Code the helper and the app both link: the code-signing pin, the wire's cap and revision, the sleep hold's messages, the wire contract |
 | `Resources/com.localnook.app.fan-helper.plist` | The launchd job |
-| `Package.swift` | The package: three targets and the `LocalNookFanHelper` executable. Generated from LocalNook's own package declarations |
-| `build-helper.sh` | Builds, strips and signs the helper the way LocalNook's release script does |
-| `mpl/` | `ElevatedWindowSpace.swift`, a file of the LocalNook app under the Mozilla Public License 2.0, with its licence. Not part of the helper; see `mpl/README.md` |
+| `Package.swift` | The package: three targets and the `LocalNookFanHelper` executable. Generated from Oriel's own package declarations |
+| `build-helper.sh` | Builds, strips and signs the helper the way Oriel's release script does |
+| `mpl/` | `ElevatedWindowSpace.swift`, a file of the Oriel app under the Mozilla Public License 2.0, with its licence. Not part of the helper; see `mpl/README.md` |
 | `LICENSE`, `LICENSES/`, `NOTICE` | Licence texts and who owns what |
 | `PROVENANCE`, `MANIFEST.sha256` | Where this tree came from, and a checksum of every file |
 
-The LocalNook app itself is not in this tree and is not free software; it
+The Oriel app itself is not in this tree and is not free software; it
 talks to this program over XPC and links none of its code.
 
 ## Licences
@@ -107,17 +112,17 @@ and the XPC round trip stays inside the process. It ends with a line like
 and decoder against the texts in `HelperWireContract.swift`, and the helper
 reporting revision 3.
 
-## Compare it with the helper shipped in LocalNook.app
+## Compare it with the helper shipped in Oriel.app
 
 The shipped helper is at
-`LocalNook.app/Contents/Library/LaunchServices/com.localnook.app.fan-helper`,
-and `PROVENANCE` names the LocalNook version this tree matches. To see whether a
+`Oriel.app/Contents/Library/LaunchServices/com.localnook.app.fan-helper`,
+and `PROVENANCE` names the Oriel version this tree matches. To see whether a
 build of this tree is the same program as the one you were given, compare the
 code and leave the signatures out of it, since a signature is made with a key
 you do not have:
 
 ```sh
-APP=/path/to/LocalNook.app
+APP=/path/to/Oriel.app
 SHIPPED="$APP/Contents/Library/LaunchServices/com.localnook.app.fan-helper"
 WORK="$(mktemp -d)"
 cp "$SHIPPED" "$WORK/shipped"
@@ -130,7 +135,7 @@ A rebuild in the same folder, with the same Swift toolchain on the same macOS,
 gives the same bytes this way. A build in a folder with another path, or with
 another toolchain, can differ by a few dozen bytes (the Mach-O UUID is one)
 without being a different program, and the shipped helper was built inside
-LocalNook's whole package rather than this one. So if the hashes differ, compare
+Oriel's whole package rather than this one. So if the hashes differ, compare
 what the program is made of: the sizes, the symbol names (`nm`), the strings
 (`strings -a`) and `codesign -dv --verbose=4` on both. Two builds of this tree
 in different folders have the same size and the same symbol names. This
@@ -139,7 +144,7 @@ tree's wire revision is `HelperWire.revision` in
 
 ## Install and remove it by hand
 
-This replaces any helper already installed, including the one LocalNook.app
+This replaces any helper already installed, including the one Oriel.app
 installed for you; the app's own Install/Update helper row does the same with
 one administrator prompt. Everything below runs as root, so read it first.
 These steps reach the same result as the app's installer, with fewer
@@ -147,8 +152,11 @@ safeguards. The app also waits (up to 10 seconds) for the old job to leave
 launchd; copies the program and the job to `.new` files beside their
 destinations, under `umask 077`, makes them root's and clears their extended
 attributes before checking anything; checks the program's signature there
-against the certificate it is pinned to (a build of your own would fail that
-check, which is why it is not here) and the job with the newly installed
+against the signer it is pinned to (the certificate itself for any certificate
+that is not a Developer ID Application one, a self-signed or Apple Development
+build included; the Developer ID team for a Developer ID Application
+certificate; a build of your own would fail that check, which is why it is not
+here) and the job with the newly installed
 program, each before it is moved into place; and, if any step fails, removes
 the `.new` files and loads the job that was there before. Here the job is
 checked as it is in `build/`, before it is copied, where the app checks the
@@ -189,19 +197,33 @@ only then delete the record.
 ## What the helper will serve
 
 The helper accepts connections only from a program signed with the identifier
-`com.localnook.app` by the very same certificate the helper itself is signed
-with (`identifier "com.localnook.app" and certificate leaf = H"<sha1 of its own
-certificate>"`), checked before any message is read. Each side of the pair reads
-its own certificate from its own signature at run time; nothing is compiled
-in. So:
+`com.localnook.app` by the same signer as the helper itself, checked before any
+message is read. Each side of the pair reads its own signer from its own
+signature at run time; nothing is compiled in. There are two forms:
+
+- A certificate Apple did not issue as Developer ID (the self-signed one the
+  betas up to 0.3.0 used, or an Apple Development one) is pinned by that very
+  certificate: `identifier "com.localnook.app" and certificate leaf = H"<sha1 of
+  its own certificate>"`.
+- A Developer ID Application certificate (the 0.4.0 beta on) is pinned by its
+  team, in the designated requirement codesign writes for such an app:
+  `identifier "com.localnook.app" and anchor apple generic and certificate
+  1[field.1.2.840.113635.100.6.2.6] exists and certificate
+  leaf[field.1.2.840.113635.100.6.1.13] exists and certificate
+  leaf[subject.OU] = "<team>"`. A renewed or reissued certificate of the same
+  team still matches. A binary counts as Developer ID only when its own
+  signature proves it; anything else with a certificate is pinned by its leaf.
+
+So:
 
 - A helper built here and signed ad hoc has no certificate, builds, passes its
   self-test and never listens.
 - A helper you sign with your own certificate serves an app signed by that same
-  certificate, and not the LocalNook.app that was signed with the author's.
-  Because of that, replacing the shipped helper with a build of your own does
-  not give the shipped app a working helper: the app and the helper each
-  refuse a peer signed by another certificate.
+  certificate (or, if yours is a Developer ID certificate, by your team), and
+  not the Oriel.app that was signed with the author's. Because of that,
+  replacing the shipped helper with a build of your own does not give the
+  shipped app a working helper: the app and the helper each refuse a peer
+  signed by another certificate or another team.
 
 The wire is the same either way, so a program you write that speaks it (the
 texts in `Sources/LocalNookShared/HelperWireContract.swift`) can be the other

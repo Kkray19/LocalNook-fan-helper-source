@@ -40,9 +40,11 @@
 //                       holding the Mac awake means restoring sleep.
 //    no certificate     an ad-hoc helper has nothing to pin the app to, so
 //                       it never listens; it exits once nothing is held.
-//    listen             pinned to `identifier "com.localnook.app" and
-//                       certificate leaf = H"<own leaf SHA-1>"`, validated
-//                       before NSXPC sees it (NSXPC traps on a bad one).
+//    listen             pinned to `identifier "com.localnook.app"` and the
+//                       helper's own signer: `certificate leaf = H"<own
+//                       leaf SHA-1>"`, or its team when it is Developer ID
+//                       (CodeSigningPin), validated before NSXPC sees it
+//                       (NSXPC traps on a bad one).
 //  SIGTERM and SIGINT hand the fans back and restore sleep before exiting,
 //  retrying for up to 20 s; launchd's ExitTimeOut (30 s) is the backstop.
 //  Ten seconds after the last connection closes, with nothing held by
@@ -124,9 +126,9 @@ enum HelperDaemon {
             }
         }
 
-        guard let leaf = CodeSigningPin.ownLeafSHA1(),
+        guard let signer = CodeSigningPin.ownSigner(),
               let requirement = CodeSigningPin.requirement(identifier: FanHelperIdentity.appIdentifier,
-                                                           leafSHA1: leaf)
+                                                           signer: signer)
         else {
             log.error("no signing certificate to pin the app to; not listening")
             stop()

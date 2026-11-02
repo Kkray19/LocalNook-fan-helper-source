@@ -109,6 +109,19 @@ final class HelperSelfTest {
         check("the pin the listener would use compiles, naming the app and the leaf",
               pin == "identifier \"com.localnook.app\" and certificate leaf = H\"\(String(repeating: "a1", count: 20))\"",
               pin ?? "nil")
+        let teamPin = CodeSigningPin.requirement(identifier: FanHelperIdentity.appIdentifier,
+                                                 signer: .developerID(team: "ABCDE12345"))
+        check("a Developer ID helper's pin compiles, naming the app, Apple's Developer ID chain and the team",
+              teamPin == "identifier \"com.localnook.app\" and anchor apple generic"
+                  + " and certificate 1[field.1.2.840.113635.100.6.2.6] exists"
+                  + " and certificate leaf[field.1.2.840.113635.100.6.1.13] exists"
+                  + " and certificate leaf[subject.OU] = \"ABCDE12345\"",
+              teamPin ?? "nil")
+        check("a malformed team is refused",
+              CodeSigningPin.requirement(identifier: FanHelperIdentity.appIdentifier,
+                                         signer: .developerID(team: "abcde12345")) == nil
+                  && CodeSigningPin.requirement(identifier: FanHelperIdentity.appIdentifier,
+                                                signer: .developerID(team: "ABCDE1234\"")) == nil)
         check("the helper's identity is one name for label, service and signature",
               FanHelperIdentity.label == "com.localnook.app.fan-helper"
                   && FanHelperIdentity.installedBinary.hasSuffix("/" + FanHelperIdentity.label))

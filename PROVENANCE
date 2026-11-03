@@ -1,10 +1,10 @@
 Oriel fan helper (formerly LocalNook): where this source tree came from
 
-Repository commit:   1bab2d671344c1458379f94f7f7590c2d3c2e4a5
-Commit date:         2026-11-02T11:29:13-06:00
-Commit subject:      Helper source tree: say Oriel, keep the old name only where it is an identifier
+Repository commit:   37e6ceb3581e6ff6d893daf27d8868e6224dc269
+Commit date:         2026-11-03T16:09:55-05:00
+Commit subject:      0.4.1 prep: VERSION, the phone's version and build number (0.4.1, 3), the changelog heading
 Tagged:              (no tag)
-Oriel version:       0.4.0 (the VERSION file at that commit; not a LocalNook number: Oriel's numbering began again at 0.1.0)
+Oriel version:       0.4.1 (the VERSION file at that commit; not a LocalNook number: Oriel's numbering began again at 0.1.0)
 Helper wire revision: 3 (Sources/LocalNookShared/HelperWire.swift)
 
 Every file in this tree is a tracked file of that commit, byte for byte, except
@@ -23,5 +23,5 @@ Where each part comes from (repository path -> path in this tree):
   scripts/helper-source/{README.md,NOTICE,build-helper.sh,mpl-README.md}
                                                     -> README.md, NOTICE, build-helper.sh, mpl/README.md
 
-Made by: scripts/make-helper-source.sh --commit 1bab2d671344c1458379f94f7f7590c2d3c2e4a5
+Made by: scripts/make-helper-source.sh --commit 37e6ceb3581e6ff6d893daf27d8868e6224dc269
 A tree made from the same commit has the same MANIFEST.sha256.
